@@ -1,18 +1,18 @@
 /* jshint esversion: 8 */
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const pinoLogger = require('./logger');
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const pinoLogger = require('./logger')
 
-const connectToDatabase = require('./models/db');
-const { loadData } = require('./util/import-mongo/index');
+const connectToDatabase = require('./models/db')
+// const { loadData } = require('./util/import-mongo/index');
 
 // routes import
-const secondChanceItemsRoutes = require('./routes/secondChanceItemsRoutes');
-const searchRoutes = require('./routes/searchRoutes');
+const secondChanceItemsRoutes = require('./routes/secondChanceItemsRoutes')
+const searchRoutes = require('./routes/searchRoutes')
 const authRoutes = require('./routes/authRoutes')
 
-const app = express();
+const app = express()
 app.use("*",cors());
 const port = 3060;
 
