@@ -1,7 +1,5 @@
 const express = require('express')
 const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 const router = express.Router()
 const connectToDatabase = require('../models/db')
 const logger = require('../logger')
@@ -11,13 +9,14 @@ const directoryPath = 'public/images'
 
 // Set up storage for uploaded files
 const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, directoryPath) // Specify the upload directory
-  },
-  filename(req, file, cb) {
-    cb(null, file.originalname) // Use the original file name
-  }
-})
+    destination: function (req, file, cb) {
+      cb(null, directoryPath) // Specify the upload directory
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname) // Use the original file name
+    }
+  })
+  
 
 const upload = multer({ storage })
 
