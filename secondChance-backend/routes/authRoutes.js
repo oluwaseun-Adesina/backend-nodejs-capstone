@@ -16,7 +16,6 @@ router.post('/register', async (req, res) => {
   try {
     const db = await connectToDatabase()
     const collection = db.collection('users')
-    
     const existingEmail = await collection.findOne({ email: req.body.email })
     if (existingEmail) {
       logger.error('Email id already exists')
@@ -31,13 +30,13 @@ router.post('/register', async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       password: hash,
-      createdAt: new Date(),
+      createdAt: new Date()
     })
 
     const payload = {
       user: {
-        id: newUser.insertedId,
-      },
+        id: newUser.insertedId
+      }
     }
 
     const authtoken = jwt.sign(payload, JWT_SECRET)
@@ -68,8 +67,8 @@ router.post('/login', async (req, res) => {
 
     const payload = {
       user: {
-        id: theUser._id.toString(),
-      },
+        id: theUser._id.toString()
+      }
     }
 
     const authtoken = jwt.sign(payload, JWT_SECRET)
@@ -77,7 +76,7 @@ router.post('/login', async (req, res) => {
     return res.status(200).json({
       authtoken,
       userName: theUser.firstName,
-      userEmail: theUser.email,
+      userEmail: theUser.email
     })
   } catch (e) {
     logger.error(e.message)
@@ -118,8 +117,8 @@ router.put('/update', async (req, res) => {
 
     const payload = {
       user: {
-        id: updatedUser.value._id.toString(),
-      },
+        id: updatedUser.value._id.toString()
+      }
     }
 
     const authtoken = jwt.sign(payload, JWT_SECRET)
